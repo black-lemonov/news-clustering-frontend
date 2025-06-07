@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список рефератов</title>
+    <style>
+        .pagination { 
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .pagination a, .pagination span {
+            padding: 5px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+        .pagination .current {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .summary { 
+            border-bottom: 1px solid #eee; 
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Рефераты</h1>
+    
+    {% for summary in summaries %}
+    <div class="summary">
+        <h3><a href="{{ url_for('summary_detail', id=summary['cluster_n']) }}">{{ summary['title'] }}</a></h3>
+        <p>{{ summary['summary'][:150] }}...</p>
+        <small>{{ summary['created_at'] }}</small>
+    </div>
+    {% endfor %}
+
+    <div class="pagination">
+        {% if current_page > 1 %}
+            <a href="{{ url_for('index', page=1, size=pagination['size']) }}">&laquo; Первая</a>
+            <a href="{{ url_for('index', page=current_page-1, size=pagination['size']) }}">&lsaquo; Назад</a>
+        {% endif %}
+        
+        {% for p in page_range %}
+            {% if p == current_page %}
+                <span class="current">{{ p }}</span>
+            {% else %}
+                <a href="{{ url_for('index', page=p, size=pagination['size']) }}">{{ p }}</a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if current_page < total_pages %}
+            <a href="{{ url_for('index', page=current_page+1, size=pagination['size']) }}">Вперед &rsaquo;</a>
+            <a href="{{ url_for('index', page=total_pages, size=pagination['size']) }}">Последняя &raquo;</a>
+        {% endif %}
+    </div>
+    
+    <p>Страница {{ current_page }} из {{ total_pages }}</p>
+</body>
+</html>
