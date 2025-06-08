@@ -29,3 +29,11 @@ def format_date(date_str: str) -> str:
         return f"Вчера {dt.strftime('%H:%M')}"
     
     return dt.strftime("%d.%m.%Y %H:%M")
+
+
+def get_cache_key(page, size):
+    return f"summaries:{page}:{size}"
+
+
+def get_cache_key_by_id(id):
+    return f"cluster:{id}"
