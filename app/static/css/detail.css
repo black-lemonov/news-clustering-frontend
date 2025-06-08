@@ -1,0 +1,210 @@
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --border: #dee2e6;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: #f5f7fb;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+p {
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray);
+    font-size: 0.9rem;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.actions { 
+    margin: 30px 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.like-btn {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.dislike-btn {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.action-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.action-btn.like-btn.active {
+    background-color: #2e7d32;
+}
+
+.action-btn.dislike-btn.active {
+    background-color: #c62828;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+    color: var(--secondary);
+}
+
+.source-list { 
+    margin-top: 10px;
+    display: grid;
+    gap: 12px;
+}
+
+.source { 
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--light);
+    transition: var(--transition);
+}
+
+.source:hover {
+    transform: translateX(5px);
+    background: #e9ecef;
+}
+
+.source a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.source a:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 30px;
+    padding: 12px 25px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: var(--transition);
+    gap: 8px;
+}
+
+.back-link:hover {
+    background: #e9ecef;
+    transform: translateX(-3px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .meta {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+    
+    .action-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
