@@ -25,11 +25,14 @@ def index():
             summaries=summaries,
             pagination=pagination,
             current_page=page,
-            total_pages=pagination["total"],
+            total_pages=max(pagination["total"]-1, 0),
             date_formatter=format_date
         )
-    else:
-        return f"Ошибка: {response.status_code}", 500
+    
+    if response.status_code == 404:
+        return render_template('errors/404.html'), 404
+        
+    return render_template('errors/500.html'), 500
 
 @bp.route('/summary/<int:id>')
 def summary_detail(id):
@@ -50,5 +53,8 @@ def summary_detail(id):
             summary_id=str_id,
             date_formatter=format_date
         )
-    else:
-        return "Реферат не найден", 404
+    
+    if response.status_code == 404:
+        return render_template('errors/404.html'), 404
+        
+    return render_template('errors/500.html'), 500

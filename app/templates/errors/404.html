@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена (404)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/errors/error.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/errors/error-404.css') }}">
+</head>
+<body class="error-404">
+    <div class="error-container">
+        <div class="error-icon">404</div>
+        <h1>Страница не найдена</h1>
+        <p>Извините, запрошенная вами страница не существует или была перемещена.</p>
+        
+        <div class="btn-group">
+            <a href="{{ url_for('main.index') }}" class="btn">На главную</a>
+            <a href="javascript:history.back()" class="btn btn-outline">Вернуться назад</a>
+        </div>
+    </div>
+</body>
+</html>

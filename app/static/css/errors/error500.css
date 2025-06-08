@@ -1,0 +1,32 @@
+.error-500 .error-icon {
+    color: #dc3545;
+}
+
+.suggestions {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.suggestions h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: #343a40;
+}
+
+.suggestions ul {
+    padding-left: 25px;
+}
+
+.suggestions li {
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+@media (max-width: 576px) {
+    .suggestions {
+        padding: 15px;
+    }
+}
