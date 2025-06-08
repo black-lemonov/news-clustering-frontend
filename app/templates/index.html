@@ -17,8 +17,7 @@
             <h3><a href="{{ url_for('main.summary_detail', id=summary['cluster_n']) }}">{{ summary['title'] }}</a></h3>
             <p>{{ summary['summary'][:150] }}...</p>
             <div class="meta">
-                <small>{{ summary['created_at'] }}</small>
-                <a href="{{ url_for('main.summary_detail', id=summary['cluster_n']) }}">Читать полностью →</a>
+                <time datetime="{{summary['created_at']}}">{{ date_formatter(summary['created_at']) }}</time>
             </div>
         </div>
         {% endfor %}

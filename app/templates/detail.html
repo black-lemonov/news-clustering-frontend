@@ -11,23 +11,21 @@
         <h1>{{ summary['title'] }}</h1>
         
         <div class="meta">
-            <small>Дата создания: {{ summary['created_at'] }}</small>
+            <time datetime="{{summary['created_at']}}">{{ date_formatter(summary['created_at']) }}</time>
         </div>
         
         <p>{{ summary['summary'] }}</p>
         
         <div class="actions">
-            <!-- Кнопка лайка -->
             <a href="{{ url_for('reactions.handle_reaction', id=summary_id, action='like', state=('remove' if reaction_state['like'] else 'add')) }}">
                 <button class="action-btn like-btn {% if reaction_state['like'] %}active{% endif %}">
-                    {{ '👍 Убрать лайк' if reaction_state['like'] else '👍 Поставить лайк' }}
+                    👍
                 </button>
             </a>
             
-            <!-- Кнопка дизлайка -->
             <a href="{{ url_for('reactions.handle_reaction', id=summary_id, action='dislike', state=('remove' if reaction_state['dislike'] else 'add')) }}">
                 <button class="action-btn dislike-btn {% if reaction_state['dislike'] %}active{% endif %}">
-                    {{ '👎 Убрать дизлайк' if reaction_state['dislike'] else '👎 Поставить дизлайк' }}
+                    👎
                 </button>
             </a>
         </div>

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session
 import requests
 from app import BASE_API_URL
-from app.utils import init_reactions
+from app.utils import init_reactions, format_date
 
 bp = Blueprint('main', __name__)
 
@@ -25,7 +25,8 @@ def index():
             summaries=summaries,
             pagination=pagination,
             current_page=page,
-            total_pages=pagination["total"]
+            total_pages=pagination["total"],
+            date_formatter=format_date
         )
     else:
         return f"Ошибка: {response.status_code}", 500
@@ -42,9 +43,12 @@ def summary_detail(id):
             'like': False,
             'dislike': False
         })
-        return render_template('detail.html', 
-                              summary=summary,
-                              reaction_state=reaction_state,
-                              summary_id=str_id)
+        return render_template(
+            'detail.html', 
+            summary=summary,
+            reaction_state=reaction_state,
+            summary_id=str_id,
+            date_formatter=format_date
+        )
     else:
         return "Реферат не найден", 404
