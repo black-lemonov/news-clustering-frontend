@@ -1,99 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ summary['title'] }}</title>
-    <style>
-        .actions { 
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-        .action-btn {
-            padding: 8px 15px;
-            cursor: pointer;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: white;
-            transition: all 0.2s;
-            display: inline-block;
-        }
-        .action-btn:hover {
-            background: #f0f0f0;
-        }
-        .action-btn.active {
-            background-color: #4CAF50;
-            color: white;
-            border-color: #4CAF50;
-        }
-        .action-btn.dislike.active {
-            background-color: #f44336;
-            border-color: #f44336;
-        }
-        .source-list { margin-top: 30px; }
-        .source { 
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 8px 15px;
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
 </head>
 <body>
-    <h1>{{ summary['title'] }}</h1>
-    <p>{{ summary['summary'] }}</p>
-    <small>Дата создания: {{ summary['created_at'] }}</small>
-    
-    <div class="actions">
-        <!-- Кнопка лайка -->
-        <a href="{{ url_for('handle_reaction', id=summary_id, action='like', state=('remove' if reaction_state['like'] else 'add')) }}">
-            <button class="action-btn like-btn {% if reaction_state['like'] %}active{% endif %}">
-                {{ '👍 Убрать лайк' if reaction_state['like'] else '👍 Поставить лайк' }}
-            </button>
-        </a>
+    <div class="container">
+        <h1>{{ summary['title'] }}</h1>
         
-        <!-- Кнопка дизлайка -->
-        <a href="{{ url_for('handle_reaction', id=summary_id, action='dislike', state=('remove' if reaction_state['dislike'] else 'add')) }}">
-            <button class="action-btn dislike-btn {% if reaction_state['dislike'] %}active{% endif %}">
-                {{ '👎 Убрать дизлайк' if reaction_state['dislike'] else '👎 Поставить дизлайк' }}
-            </button>
-        </a>
-    </div>
-    
-    <h2>Источники:</h2>
-    <div class="source-list">
-        {% for source in summary['news'] %}
-        <div class="source">
-            <a href="{{ source['url'] }}" target="_blank">{{ source['title'] }}</a>
+        <div class="meta">
+            <small>Дата создания: {{ summary['created_at'] }}</small>
         </div>
-        {% endfor %}
+        
+        <p>{{ summary['summary'] }}</p>
+        
+        <div class="actions">
+            <!-- Кнопка лайка -->
+            <a href="{{ url_for('handle_reaction', id=summary_id, action='like', state=('remove' if reaction_state['like'] else 'add')) }}">
+                <button class="action-btn like-btn {% if reaction_state['like'] %}active{% endif %}">
+                    {{ '👍 Убрать лайк' if reaction_state['like'] else '👍 Поставить лайк' }}
+                </button>
+            </a>
+            
+            <!-- Кнопка дизлайка -->
+            <a href="{{ url_for('handle_reaction', id=summary_id, action='dislike', state=('remove' if reaction_state['dislike'] else 'add')) }}">
+                <button class="action-btn dislike-btn {% if reaction_state['dislike'] %}active{% endif %}">
+                    {{ '👎 Убрать дизлайк' if reaction_state['dislike'] else '👎 Поставить дизлайк' }}
+                </button>
+            </a>
+        </div>
+        
+        <h2>Источники:</h2>
+        <div class="source-list">
+            {% for source in summary['news'] %}
+            <div class="source">
+                <a href="{{ source['url'] }}" target="_blank">{{ source['title'] }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <a href="{{ url_for('index') }}" class="back-link">← Вернуться к списку</a>
     </div>
     
-    <a href="{{ url_for('index') }}" class="back-link">← Вернуться к списку</a>
-    
-    <script>
-        // Добавляем обработчики для AJAX-запросов
-        document.querySelectorAll('.action-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const link = this.parentNode.href;
-                
-                // Отправляем запрос
-                fetch(link)
-                    .then(response => {
-                        if (response.redirected) {
-                            window.location.href = response.url;
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
 </body>
 </html>

@@ -1,44 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список рефератов</title>
-    <style>
-        .pagination { 
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-        .pagination a, .pagination span {
-            padding: 5px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            text-decoration: none;
-        }
-        .pagination a:hover {
-            background-color: #f0f0f0;
-        }
-        .pagination .current {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .summary { 
-            border-bottom: 1px solid #eee; 
-            padding: 15px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
-    <h1>Рефераты</h1>
+    <header>
+        <h1>Рефераты</h1>
+    </header>
     
-    {% for summary in summaries %}
-    <div class="summary">
-        <h3><a href="{{ url_for('summary_detail', id=summary['cluster_n']) }}">{{ summary['title'] }}</a></h3>
-        <p>{{ summary['summary'][:150] }}...</p>
-        <small>{{ summary['created_at'] }}</small>
+    <div class="summaries">
+        {% for summary in summaries %}
+        <div class="summary">
+            <h3><a href="{{ url_for('summary_detail', id=summary['cluster_n']) }}">{{ summary['title'] }}</a></h3>
+            <p>{{ summary['summary'][:150] }}...</p>
+            <div class="meta">
+                <small>{{ summary['created_at'] }}</small>
+                <a href="{{ url_for('summary_detail', id=summary['cluster_n']) }}">Читать полностью →</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 
     <div class="pagination">
         {% if current_page > 1 %}
@@ -60,6 +44,8 @@
         {% endif %}
     </div>
     
-    <p>Страница {{ current_page }} из {{ total_pages }}</p>
+    <p class="pagination-info">Страница {{ current_page }} из {{ total_pages }}</p>
+    
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
