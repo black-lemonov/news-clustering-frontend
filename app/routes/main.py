@@ -59,7 +59,7 @@ def index():
         
     return render_template('errors/500.html'), 500
 
-@bp.route('/summary/<int:id>')
+@bp.route('/summaries/<int:id>')
 def summary_detail(id):
     init_reactions()
     
