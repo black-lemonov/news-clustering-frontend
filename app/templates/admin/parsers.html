@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Управление парсерами{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Управление парсерами</h2>
+    
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>Добавить парсер</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Загрузить конфигурацию парсера (JSON):</label>
+                    <input class="form-control" type="file" id="file" name="file" accept=".json" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Загрузить</button>
+                <a href="{{ url_for('admin.admin_parsers_template') }}" class="btn btn-outline-secondary ms-2">
+                    <i class="bi bi-download"></i> Скачать шаблон
+                </a>
+            </form>
+        </div>
+    </div>
+    
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>Список парсеров</h5>
+        </div>
+        <div class="card-body">
+            {% if sites %}
+                <ul class="list-group">
+                    {% for site in sites %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ site }}
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="site_url" value="{{ site }}">
+                                <button type="submit" name="delete" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Удалить
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">Нет загруженных парсеров</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

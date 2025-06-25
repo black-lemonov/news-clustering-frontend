@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Панель управления</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Управление моделями</h5>
+                    <p class="card-text">Настройка моделей для генерации рефератов</p>
+                    <a href="{{ url_for('admin.admin_models') }}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Управление парсерами</h5>
+                    <p class="card-text">Добавление и удаление парсеров новостей</p>
+                    <a href="{{ url_for('admin.admin_parsers') }}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Системные функции</h5>
+                    <p class="card-text">Запуск парсинга и генерации рефератов</p>
+                    <a href="{{ url_for('admin.admin_system') }}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
